@@ -14,14 +14,13 @@
 
 #include <doctest/doctest.h>
 
-#include <xpr/xpr.hpp>
 #include <xpr/version.h>
-
+#include <xpr/xpr.hpp>
 
 TEST_CASE("Xpr") {
-  using namespace xpr;
+    using namespace xpr;
 
-  // Xpr xpr;
+    // Xpr xpr;
 
-  CHECK(true);
+    CHECK(true);
 }

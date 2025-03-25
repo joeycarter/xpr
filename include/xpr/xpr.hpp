@@ -16,9 +16,9 @@
 
 namespace xpr {
 
-  class Xpr {
-    public:
-      Xpr() = default;
-  };
+    class Xpr {
+      public:
+        Xpr() = default;
+    };
 
 }  // namespace xpr
