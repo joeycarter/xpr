@@ -18,7 +18,7 @@
 
 namespace xpr {
 
-    class PlacementLoc;
+    struct PlacementLoc;
 
     /**
      * @brief The "floor plan" of the quantum computer.

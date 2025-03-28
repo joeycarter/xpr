@@ -21,7 +21,7 @@ namespace xpr {
 
     class PlacementState;
     class PlacementCosts;
-    class PlacementOptions;
+    struct PlacementOptions;
 
     struct AnnealerStatistics {
     public:
