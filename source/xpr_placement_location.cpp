@@ -12,27 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
+#include <fmt/base.h>
+#include <fmt/format.h>
 
-#include <memory>
-
-#include <xpr/xpr_floorplan.hpp>
-#include <xpr/xpr_netlist.hpp>
-#include <xpr/xpr_placement_options.hpp>
-#include <xpr/xpr_placer.hpp>
+#include <xpr/xpr_placement_location.hpp>
 
 namespace xpr {
-
-    class Xpr {
-    public:
-        Xpr(const Netlist& netlist, const FloorPlan& floorplan,
-            const PlacementOptions& placer_options);
-
-    public:
-        void run();
-
-    private:
-        std::unique_ptr<Placer> placer_;
-    };
-
+    std::string PlacementLoc::to_string() const { return fmt::format("({}, {}, {})", x, y, n); }
 }  // namespace xpr

@@ -14,25 +14,35 @@
 
 #pragma once
 
-#include <memory>
-
+#include <xpr/xpr_annealer.hpp>
 #include <xpr/xpr_floorplan.hpp>
 #include <xpr/xpr_netlist.hpp>
+#include <xpr/xpr_placement_costs.hpp>
 #include <xpr/xpr_placement_options.hpp>
-#include <xpr/xpr_placer.hpp>
+#include <xpr/xpr_placement_state.hpp>
+#include <xpr/xpr_random.hpp>
 
 namespace xpr {
 
-    class Xpr {
+    class Placer {
     public:
-        Xpr(const Netlist& netlist, const FloorPlan& floorplan,
-            const PlacementOptions& placer_options);
+        Placer(const Netlist& netlist, const FloorPlan& floorplan,
+               const PlacementOptions& placer_options);
 
     public:
-        void run();
+        void place();
 
     private:
-        std::unique_ptr<Placer> placer_;
+        void init_placement();
+
+    private:
+        const Netlist& netlist_;
+        const FloorPlan& floorplan_;
+        const PlacementOptions& placer_options_;
+        PlacementState placer_state_;
+        PlacementCosts placer_costs_;
+        RandomNumberGenerator rng_;
+        PlacementAnnealer annealer_{placer_state_, placer_costs_, rng_};
     };
 
 }  // namespace xpr

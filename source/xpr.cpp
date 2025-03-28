@@ -12,6 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <xpr/xpr.hpp>
+#include <cassert>
 
-namespace xpr {}  // namespace xpr
+#include <memory>
+#include <xpr/xpr.hpp>
+#include <xpr/xpr_placer.hpp>
+#include <xpr/xpr_utils.hpp>
+
+namespace xpr {
+
+    Xpr::Xpr(const Netlist& netlist, const FloorPlan& floorplan,
+             const PlacementOptions& placer_options) {
+        placer_ = std::make_unique<Placer>(netlist, floorplan, placer_options);
+    }
+
+    void Xpr::run() {
+        XPR_ASSERT(placer_ != nullptr, "The placer has not been initialized");
+        placer_->place();
+    }
+
+}  // namespace xpr

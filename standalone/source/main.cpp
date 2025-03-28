@@ -19,6 +19,11 @@
 
 #include <xpr/version.h>
 #include <xpr/xpr.hpp>
+#include <xpr/xpr_floorplan.hpp>
+#include <xpr/xpr_placement_options.hpp>
+#include <xpr/xpr_utils.hpp>
+
+#include "netlist_generator.hpp"
 
 auto main(int argc, char** argv) -> int {
     cxxopts::Options options(*argv, "XPR: A place-and-route engine for quantum computers");
@@ -42,7 +47,23 @@ auto main(int argc, char** argv) -> int {
         return 0;
     }
 
-    // xpr::Xpr xpr;
+    // Generate a random netlist with N QPUs ("blocks")
+    auto netlist = generate_random_netlist(10'000, "netlist");
+
+    // Generate a floor plan with given dimensions
+    // The total number of available QPU slots is n_crate_x * n_crate_y * n_qpu_per_crate
+    xpr::FloorPlan floorplan(70,    // n_crate_x
+                             40,    // n_crate_y
+                             5,     // n_qpu_per_crate
+                             3.0f,  // scale_x
+                             2.5f,  // scale_y
+                             0.2f   // scale_qpu
+    );
+
+    xpr::PlacementOptions placer_options;
+
+    xpr::Xpr xpr(*netlist, floorplan, placer_options);
+    xpr.run();
 
     return 0;
 }

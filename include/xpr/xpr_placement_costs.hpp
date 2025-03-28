@@ -14,25 +14,11 @@
 
 #pragma once
 
-#include <memory>
-
-#include <xpr/xpr_floorplan.hpp>
-#include <xpr/xpr_netlist.hpp>
-#include <xpr/xpr_placement_options.hpp>
-#include <xpr/xpr_placer.hpp>
-
 namespace xpr {
 
-    class Xpr {
+    class PlacementCosts {
     public:
-        Xpr(const Netlist& netlist, const FloorPlan& floorplan,
-            const PlacementOptions& placer_options);
-
-    public:
-        void run();
-
-    private:
-        std::unique_ptr<Placer> placer_;
+        PlacementCosts() = default;
     };
 
 }  // namespace xpr

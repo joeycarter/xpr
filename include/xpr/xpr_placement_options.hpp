@@ -14,25 +14,15 @@
 
 #pragma once
 
-#include <memory>
-
-#include <xpr/xpr_floorplan.hpp>
-#include <xpr/xpr_netlist.hpp>
-#include <xpr/xpr_placement_options.hpp>
-#include <xpr/xpr_placer.hpp>
+#include <xpr/xpr_annealing_schedule.hpp>
 
 namespace xpr {
 
-    class Xpr {
-    public:
-        Xpr(const Netlist& netlist, const FloorPlan& floorplan,
-            const PlacementOptions& placer_options);
+    struct PlacementOptions {
+        PlacementOptions() = default;
 
-    public:
-        void run();
-
-    private:
-        std::unique_ptr<Placer> placer_;
+        AnnealingSchedule anneal_schedule;
+        int rng_seed = 42;
     };
 
 }  // namespace xpr

@@ -14,25 +14,25 @@
 
 #pragma once
 
-#include <memory>
+#include <unordered_set>
+#include <vector>
 
-#include <xpr/xpr_floorplan.hpp>
-#include <xpr/xpr_netlist.hpp>
-#include <xpr/xpr_placement_options.hpp>
-#include <xpr/xpr_placer.hpp>
+#include <xpr/xpr_placement_location.hpp>
 
 namespace xpr {
 
-    class Xpr {
-    public:
-        Xpr(const Netlist& netlist, const FloorPlan& floorplan,
-            const PlacementOptions& placer_options);
+    struct MovedBlock {
+        MovedBlock(int block_id_, const PlacementLoc& old_loc_, const PlacementLoc& new_loc_)
+            : block_id(block_id_), old_loc(old_loc_), new_loc(new_loc_) {}
 
-    public:
-        void run();
-
-    private:
-        std::unique_ptr<Placer> placer_;
+        int block_id;
+        PlacementLoc old_loc;
+        PlacementLoc new_loc;
     };
 
+    struct BlockToBeMoved {
+        std::vector<MovedBlock> moved_blocks;
+        std::unordered_set<PlacementLoc> moved_from;
+        std::unordered_set<PlacementLoc> moved_to;
+    };
 }  // namespace xpr

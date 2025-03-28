@@ -12,27 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
+#include <doctest/doctest.h>
 
-#include <memory>
+#include <xpr/xpr_placement_location.hpp>
 
-#include <xpr/xpr_floorplan.hpp>
-#include <xpr/xpr_netlist.hpp>
-#include <xpr/xpr_placement_options.hpp>
-#include <xpr/xpr_placer.hpp>
+TEST_CASE("Test PlacementLoc initialization") {
+    xpr::PlacementLoc loc{1, 2, 3};
 
-namespace xpr {
+    CHECK(loc.x == 1);
+    CHECK(loc.y == 2);
+    CHECK(loc.n == 3);
+}
 
-    class Xpr {
-    public:
-        Xpr(const Netlist& netlist, const FloorPlan& floorplan,
-            const PlacementOptions& placer_options);
+TEST_CASE("Test PlacementLoc::to_string()") {
+    xpr::PlacementLoc loc{1, 2, 3};
 
-    public:
-        void run();
-
-    private:
-        std::unique_ptr<Placer> placer_;
-    };
-
-}  // namespace xpr
+    CHECK(loc.to_string() == "(1, 2, 3)");
+}

@@ -14,25 +14,20 @@
 
 #pragma once
 
-#include <memory>
-
-#include <xpr/xpr_floorplan.hpp>
-#include <xpr/xpr_netlist.hpp>
-#include <xpr/xpr_placement_options.hpp>
-#include <xpr/xpr_placer.hpp>
+#include <xpr/xpr_block_loc_registry.hpp>
 
 namespace xpr {
 
-    class Xpr {
+    class PlacementState {
     public:
-        Xpr(const Netlist& netlist, const FloorPlan& floorplan,
-            const PlacementOptions& placer_options);
+        PlacementState() = default;
 
     public:
-        void run();
+        inline const BlockLocRegistry& block_loc_registry() const { return block_loc_registry_; }
+        inline BlockLocRegistry& mutable_block_loc_registry() { return block_loc_registry_; }
 
     private:
-        std::unique_ptr<Placer> placer_;
+        BlockLocRegistry block_loc_registry_;
     };
 
 }  // namespace xpr

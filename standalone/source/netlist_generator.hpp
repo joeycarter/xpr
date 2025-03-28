@@ -12,15 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <doctest/doctest.h>
+#pragma once
 
-#include <xpr/version.h>
-#include <xpr/xpr.hpp>
+#include <cstddef>
+#include <memory>
+#include <string>
+#include <vector>
 
-TEST_CASE("Xpr") {
-    using namespace xpr;
+#include <xpr/xpr_netlist.hpp>
 
-    // Xpr xpr;
+std::unique_ptr<xpr::Netlist> generate_random_netlist(size_t n_blocks,
+                                                      const std::string& netlist_name);
 
-    CHECK(true);
-}
+std::vector<int> generate_random_vector(int n, int k);

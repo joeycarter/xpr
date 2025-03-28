@@ -14,25 +14,21 @@
 
 #pragma once
 
-#include <memory>
-
-#include <xpr/xpr_floorplan.hpp>
-#include <xpr/xpr_netlist.hpp>
-#include <xpr/xpr_placement_options.hpp>
-#include <xpr/xpr_placer.hpp>
+#include <xpr/xpr_placement_state.hpp>
+#include <xpr/xpr_random.hpp>
 
 namespace xpr {
 
-    class Xpr {
+    class MoveGenerator {
     public:
-        Xpr(const Netlist& netlist, const FloorPlan& floorplan,
-            const PlacementOptions& placer_options);
+        MoveGenerator();
 
     public:
-        void run();
+        void propose_move();
 
     private:
-        std::unique_ptr<Placer> placer_;
+        PlacementState placement_state_;
+        RandomNumberGenerator rng_;
     };
 
 }  // namespace xpr

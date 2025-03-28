@@ -12,27 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
-
-#include <memory>
-
-#include <xpr/xpr_floorplan.hpp>
-#include <xpr/xpr_netlist.hpp>
-#include <xpr/xpr_placement_options.hpp>
-#include <xpr/xpr_placer.hpp>
+#include <xpr/xpr_annealer.hpp>
 
 namespace xpr {
 
-    class Xpr {
-    public:
-        Xpr(const Netlist& netlist, const FloorPlan& floorplan,
-            const PlacementOptions& placer_options);
+    PlacementAnnealer::PlacementAnnealer(PlacementState& placement_state, PlacementCosts& costs,
+                                         RandomNumberGenerator& rng)
+        : placement_state_(placement_state), costs_(costs), rng_(rng) {}
 
-    public:
-        void run();
+    void PlacementAnnealer::placement_inner_loop() {}
 
-    private:
-        std::unique_ptr<Placer> placer_;
-    };
+    bool PlacementAnnealer::outer_loop_update_state() { return false; }
 
 }  // namespace xpr

@@ -12,27 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
-
-#include <memory>
-
-#include <xpr/xpr_floorplan.hpp>
-#include <xpr/xpr_netlist.hpp>
-#include <xpr/xpr_placement_options.hpp>
-#include <xpr/xpr_placer.hpp>
+#include <xpr/xpr_block_loc_registry.hpp>
 
 namespace xpr {
 
-    class Xpr {
-    public:
-        Xpr(const Netlist& netlist, const FloorPlan& floorplan,
-            const PlacementOptions& placer_options);
-
-    public:
-        void run();
-
-    private:
-        std::unique_ptr<Placer> placer_;
-    };
+    void BlockLocRegistry::clear() { block_locs_.clear(); }
 
 }  // namespace xpr
